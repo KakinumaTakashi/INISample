@@ -1,0 +1,40 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace INISample.setting
+{
+    /// <summary>
+    /// データベース設定を管理するクラス。
+    /// </summary>
+    public class DatabaseSettings : SettingManager
+    {
+        private const string INI_SECTION = "Databese";
+
+        public DatabaseSettings(string filename) : base(filename)
+        {
+        }
+
+        public string getHost()
+        {
+            return getStringValue(INI_SECTION, "host", null);
+        }
+
+        public int getPort()
+        {
+            return getIntValue(INI_SECTION, "port", -1);
+        }
+
+        public string getUser()
+        {
+            return getStringValue(INI_SECTION, "user", null);
+        }
+
+        public string getPassword()
+        {
+            return getStringValue(INI_SECTION, "password", null);
+        }
+    }
+}
