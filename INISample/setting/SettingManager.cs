@@ -48,8 +48,6 @@ namespace INISample.setting
         /// <returns>セクション・キーの設定値</returns>
         public string getStringValue(string section, string key, string defaultValue)
         {
-            // TODO: ファイル存在チェック
-
             StringBuilder sb = new StringBuilder(MAX_LENGTH);
 
             GetPrivateProfileString(
@@ -74,6 +72,30 @@ namespace INISample.setting
         public int getIntValue(string section, string key, int defaultValue)
         {
             return Convert.ToInt32(this.getStringValue(section, key, Convert.ToString(defaultValue)));
+        }
+
+        /// <summary>
+        /// 設定を取得する。
+        /// </summary>
+        /// <param name="section">セクション名</param>
+        /// <param name="key">キー名</param>
+        /// <param name="defaultValue">デフォルト値</param>
+        /// <returns>セクション・キーの設定値</returns>
+        public double getDoubleValue(string section, string key, double defaultValue)
+        {
+            return Convert.ToDouble(this.getStringValue(section, key, Convert.ToString(defaultValue)));
+        }
+
+        /// <summary>
+        /// 設定を取得する。
+        /// </summary>
+        /// <param name="section">セクション名</param>
+        /// <param name="key">キー名</param>
+        /// <param name="defaultValue">デフォルト値</param>
+        /// <returns>セクション・キーの設定値</returns>
+        public bool getBooleanValue(string section, string key, bool defaultValue)
+        {
+            return Convert.ToBoolean(this.getStringValue(section, key, Convert.ToString(defaultValue)));
         }
     }
 }

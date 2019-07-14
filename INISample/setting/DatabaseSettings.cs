@@ -9,13 +9,9 @@ namespace INISample.setting
     /// <summary>
     /// データベース設定を管理するクラス。
     /// </summary>
-    public class DatabaseSettings : SettingManager
+    public class DatabaseSettings : IniSampleSettings
     {
         private const string INI_SECTION = "Databese";
-
-        public DatabaseSettings(string filename) : base(filename)
-        {
-        }
 
         public string getHost()
         {

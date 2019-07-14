@@ -15,16 +15,15 @@ namespace INISample
             System.Diagnostics.Debug.WriteLine("Start");
 
             //
-            SettingManager settingManager = new SettingManager("./INISample.ini");
+            TestSettings testSettings = new TestSettings();
 
-            string key1Value = settingManager.getStringValue("test", "key1", "DEFAULT");
-            System.Diagnostics.Debug.WriteLine("key1 : " + key1Value);
-
-            int key2Value = settingManager.getIntValue("test", "key2", 0);
-            System.Diagnostics.Debug.WriteLine("key2 : " + key2Value);
+            System.Diagnostics.Debug.WriteLine("String : " + testSettings.getString());
+            System.Diagnostics.Debug.WriteLine("Int    : " + testSettings.getInt());
+            System.Diagnostics.Debug.WriteLine("Double : " + testSettings.getDouble());
+            System.Diagnostics.Debug.WriteLine("Boolean: " + testSettings.getBoolean());
 
             //
-            DatabaseSettings databaseSettings = new DatabaseSettings("./INISample.ini");
+            DatabaseSettings databaseSettings = new DatabaseSettings();
 
             System.Diagnostics.Debug.WriteLine("host : " + databaseSettings.getHost());
             System.Diagnostics.Debug.WriteLine("port : " + databaseSettings.getPort());

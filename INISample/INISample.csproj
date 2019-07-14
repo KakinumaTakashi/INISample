@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="setting\DatabaseSettings.cs" />
+    <Compile Include="setting\IniSampleSettings.cs" />
     <Compile Include="setting\SettingManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -65,6 +66,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="setting\TestSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
