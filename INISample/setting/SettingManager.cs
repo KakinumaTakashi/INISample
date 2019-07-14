@@ -9,8 +9,21 @@ namespace INISample.setting
 {
     public class SettingManager
     {
+        /// <summary>
+        /// 設定値最大長
+        /// </summary>
         private const int MAX_LENGTH = 256;
 
+        /// <summary>
+        /// DLLインポート
+        /// </summary>
+        /// <param name="lpApplicationName"></param>
+        /// <param name="lpKeyName"></param>
+        /// <param name="lpDefault"></param>
+        /// <param name="lpReturnedstring"></param>
+        /// <param name="nSize"></param>
+        /// <param name="lpFileName"></param>
+        /// <returns></returns>
         [DllImport("kernel32.dll")]
         private static extern int GetPrivateProfileString(
             string lpApplicationName,
@@ -20,13 +33,24 @@ namespace INISample.setting
             int nSize,
             string lpFileName);
 
-        //[DllImport("kernel32.dll")]
-        //private static extern int WritePrivateProfileString(
-        //    string lpApplicationName,
-        //    string lpKeyName,
-        //    string lpstring,
-        //    string lpFileName);
+        /// <summary>
+        /// DLLインポート
+        /// </summary>
+        /// <param name="lpApplicationName"></param>
+        /// <param name="lpKeyName"></param>
+        /// <param name="lpstring"></param>
+        /// <param name="lpFileName"></param>
+        /// <returns></returns>
+        [DllImport("kernel32.dll")]
+        private static extern int WritePrivateProfileString(
+            string lpApplicationName,
+            string lpKeyName,
+            string lpstring,
+            string lpFileName);
 
+        /// <summary>
+        /// INIファイル名
+        /// </summary>
         private string iniFileName;
 
 
@@ -34,7 +58,7 @@ namespace INISample.setting
         /// コンストラクタ
         /// </summary>
         /// <param name="filename">INIファイル名</param>
-        public SettingManager(string filename)
+        protected SettingManager(string filename)
         {
             this.iniFileName = filename;
         }
@@ -46,7 +70,7 @@ namespace INISample.setting
         /// <param name="key">キー名</param>
         /// <param name="defaultValue">デフォルト値</param>
         /// <returns>セクション・キーの設定値</returns>
-        public string getStringValue(string section, string key, string defaultValue)
+        protected string getStringValue(string section, string key, string defaultValue)
         {
             StringBuilder sb = new StringBuilder(MAX_LENGTH);
 
@@ -63,27 +87,36 @@ namespace INISample.setting
         }
 
         /// <summary>
+        /// 設定する。
+        /// </summary>
+        /// <param name="section">セクション名</param>
+        /// <param name="key">キー名</param>
+        /// <param name="value">設定値</param>
+        protected void setStringValue(string section, string key, string value)
+        {
+            WritePrivateProfileString(
+                section,
+                key,
+                value,
+                this.iniFileName
+            );
+        }
+
+        /// <summary>
         /// 設定を取得する。
         /// </summary>
         /// <param name="section">セクション名</param>
         /// <param name="key">キー名</param>
         /// <param name="defaultValue">デフォルト値</param>
         /// <returns>セクション・キーの設定値</returns>
-        public int getIntValue(string section, string key, int defaultValue)
+        protected int getIntValue(string section, string key, int defaultValue)
         {
             return Convert.ToInt32(this.getStringValue(section, key, Convert.ToString(defaultValue)));
         }
 
-        /// <summary>
-        /// 設定を取得する。
-        /// </summary>
-        /// <param name="section">セクション名</param>
-        /// <param name="key">キー名</param>
-        /// <param name="defaultValue">デフォルト値</param>
-        /// <returns>セクション・キーの設定値</returns>
-        public double getDoubleValue(string section, string key, double defaultValue)
+        protected void setIntValue(string section, string key, int value)
         {
-            return Convert.ToDouble(this.getStringValue(section, key, Convert.ToString(defaultValue)));
+            this.setStringValue(section, key, Convert.ToString(value));
         }
 
         /// <summary>
@@ -93,9 +126,32 @@ namespace INISample.setting
         /// <param name="key">キー名</param>
         /// <param name="defaultValue">デフォルト値</param>
         /// <returns>セクション・キーの設定値</returns>
-        public bool getBooleanValue(string section, string key, bool defaultValue)
+        protected double getDoubleValue(string section, string key, double defaultValue)
+        {
+            return Convert.ToDouble(this.getStringValue(section, key, Convert.ToString(defaultValue)));
+        }
+
+        protected void setDoubleValue(string section, string key, double value)
+        {
+            this.setStringValue(section, key, Convert.ToString(value));
+        }
+
+        /// <summary>
+        /// 設定を取得する。
+        /// </summary>
+        /// <param name="section">セクション名</param>
+        /// <param name="key">キー名</param>
+        /// <param name="defaultValue">デフォルト値</param>
+        /// <returns>セクション・キーの設定値</returns>
+        protected bool getBooleanValue(string section, string key, bool defaultValue)
         {
             return Convert.ToBoolean(this.getStringValue(section, key, Convert.ToString(defaultValue)));
         }
+
+        protected void setBooleanValue(string section, string key, bool value)
+        {
+            this.setStringValue(section, key, Convert.ToString(value));
+        }
+
     }
 }

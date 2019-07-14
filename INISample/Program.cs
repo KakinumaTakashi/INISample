@@ -30,6 +30,13 @@ namespace INISample
             System.Diagnostics.Debug.WriteLine("user : " + databaseSettings.getUser());
             System.Diagnostics.Debug.WriteLine("pass : " + databaseSettings.getPassword());
 
+            //
+            WriteSettings writeSettings = new WriteSettings();
+
+            writeSettings.setString("__AAA__");
+            writeSettings.setInt(987);
+            writeSettings.setDouble(123.456);
+            writeSettings.setBoolean(true);
 
             System.Diagnostics.Debug.WriteLine("End");
         }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace INISample.setting
 {
     /// <summary>
-    /// データベース設定を管理するクラス。
+    /// [test]セクションを管理するクラス。
     /// </summary>
     public class TestSettings : IniSampleSettings
     {
